@@ -354,7 +354,8 @@ public class AuxiliarPhoto {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            onDownListener.onDownloadCompletedInBackGround(bitmap,nameImage);
+            if (onDownListener != null)
+                onDownListener.onDownloadCompletedInBackGround(bitmap,nameImage);
             return bitmap;
         }
 

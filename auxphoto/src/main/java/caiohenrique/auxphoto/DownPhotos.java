@@ -86,6 +86,9 @@ public class DownPhotos {
     public interface OnDownloadedCompleted {
 
         void onDownloadedCompleted(String path, Bitmap bitmap);
+
+        void onDownloadedCompletedInBackground(String path, Bitmap bitmap);
+
     }
 
     private void onDownloadedCompleted(String path, Bitmap bitmap) {
@@ -139,10 +142,11 @@ public class DownPhotos {
             }
             try {
                 Thread.sleep(timeEnterDownImages);
+            } catch (Exception e) { }
 
+            if (bitmap != null && inter != null)
+                inter.onDownloadedCompletedInBackground(path, bitmap);
 
-            } catch (Exception e) {
-            }
             return bitmap;
         }
 
@@ -152,4 +156,6 @@ public class DownPhotos {
             bitmap = null;
         }
     }
+
+
 }
