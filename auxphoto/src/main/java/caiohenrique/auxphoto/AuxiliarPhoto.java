@@ -27,7 +27,9 @@ public class AuxiliarPhoto {
     private OnDownloadedListener onDownListener;
 
     public interface OnDownloadedListener {
+
         void onDownloadCompleted(Bitmap bitmap, String nameImage);
+        void onDownloadCompletedInBackGround(Bitmap bt, String nameImage);
     }
 
     public void setOnDownloadedListener(OnDownloadedListener onDownListener) {
@@ -339,7 +341,6 @@ public class AuxiliarPhoto {
         public DownloadImageTask(String PathDownload, String dir, String nameImage) {
             pathDown = PathDownload;
             this.nameImage = nameImage;
-            Log.i("BAIXANDO", "DownloadImageTask: ");
             this.dir = dir;
 
         }
@@ -347,15 +348,13 @@ public class AuxiliarPhoto {
         @Override
         protected Bitmap doInBackground(String... params) {
             Bitmap bitmap = null;
-            Log.i("BAIXANDO", "do background: " + pathDown);
-            if (isConnected(context))
                 try {
-                    Log.i("BAIXANDO", " BAIXANDO IMAGEM " + pathDown);
                     InputStream in = new URL(pathDown).openStream();
                     bitmap = BitmapFactory.decodeStream(in);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            onDownListener.onDownloadCompletedInBackGround(bitmap,nameImage);
             return bitmap;
         }
 
