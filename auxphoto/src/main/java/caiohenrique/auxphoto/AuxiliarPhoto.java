@@ -109,7 +109,6 @@ public class AuxiliarPhoto {
             }
         }
         cw = null;
-        bitmapImage = null;
         return retorno;
     }
 
@@ -366,7 +365,10 @@ public class AuxiliarPhoto {
         protected void onPostExecute(Bitmap bitmap) {
             if (onDownListener != null) {
                 onDownListener.onDownloadCompleted(bitmap, nameImage);
-                bitmap = null;
+                try {
+                    bitmap.recycle();
+                    bitmap = null;
+                } catch (Exception e) { }
             }
         }
 
