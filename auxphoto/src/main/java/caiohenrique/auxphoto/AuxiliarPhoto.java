@@ -113,6 +113,9 @@ public class AuxiliarPhoto {
         return retorno;
     }
 
+    public Context getContext() {
+        return context;
+    }
 
     public Bitmap loadImageFromStorage(String dir, String nameImage) {
         Bitmap b = null;
