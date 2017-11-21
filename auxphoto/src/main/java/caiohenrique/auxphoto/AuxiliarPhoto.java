@@ -209,8 +209,8 @@ public class AuxiliarPhoto {
             int newWidth, int newHeight) {
 
 
-        if (bmpOriginal.getWidth() <= newWidth) return null;
-        if (bmpOriginal.getHeight() <= newHeight) return null;
+        if (bmpOriginal.getWidth() <= newWidth) return bmpOriginal;
+        if (bmpOriginal.getHeight() <= newHeight) return bmpOriginal;
 
         Bitmap novoBmp = null;
 
@@ -241,19 +241,20 @@ public class AuxiliarPhoto {
             /* O nome do método já diz tudo */     Bitmap bmpOriginal,
             int newWidth) {
 
-        if (bmpOriginal.getWidth() <= newWidth) return null;
+        if (bmpOriginal.getWidth() <= newWidth) return bmpOriginal;
 
         int newHeight = newWidth * 100 / bmpOriginal.getWidth();
         newHeight = newHeight * bmpOriginal.getHeight() / 100;
 
         Bitmap novoBmp = null;
 
+
         int w = bmpOriginal.getWidth();
         int h = bmpOriginal.getHeight();
 
-        float densityFactor = context.getResources().getDisplayMetrics().density;
-        float novoW = newWidth * densityFactor;
-        float novoH = newHeight * densityFactor;
+        float densityFactor = getContext().getResources().getDisplayMetrics().density;
+        float novoW = newWidth;
+        float novoH = newHeight;
 
 
         //Escala percentual
@@ -268,6 +269,7 @@ public class AuxiliarPhoto {
 
         //img.setRotation;
         return novoBmp;
+
     }
 
 
