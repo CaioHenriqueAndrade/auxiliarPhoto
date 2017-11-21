@@ -29,6 +29,7 @@ public class AuxiliarPhoto {
     public interface OnDownloadedListener {
 
         void onDownloadCompleted(Bitmap bitmap, String nameImage);
+
         Bitmap onDownloadCompletedInBackGround(Bitmap bt, String nameImage);
     }
 
@@ -350,14 +351,14 @@ public class AuxiliarPhoto {
         @Override
         protected Bitmap doInBackground(String... params) {
             Bitmap bitmap = null;
-                try {
-                    InputStream in = new URL(pathDown).openStream();
-                    bitmap = BitmapFactory.decodeStream(in);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            try {
+                InputStream in = new URL(pathDown).openStream();
+                bitmap = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (onDownListener != null)
-                bitmap = onDownListener.onDownloadCompletedInBackGround(bitmap,nameImage);
+                bitmap = onDownListener.onDownloadCompletedInBackGround(bitmap, nameImage);
             return bitmap;
         }
 
@@ -365,10 +366,7 @@ public class AuxiliarPhoto {
         protected void onPostExecute(Bitmap bitmap) {
             if (onDownListener != null) {
                 onDownListener.onDownloadCompleted(bitmap, nameImage);
-                try {
-                    bitmap.recycle();
-                    bitmap = null;
-                } catch (Exception e) { }
+                bitmap = null;
             }
         }
 
