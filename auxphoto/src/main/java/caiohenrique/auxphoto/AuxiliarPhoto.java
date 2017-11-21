@@ -29,7 +29,7 @@ public class AuxiliarPhoto {
     public interface OnDownloadedListener {
 
         void onDownloadCompleted(Bitmap bitmap, String nameImage);
-        void onDownloadCompletedInBackGround(Bitmap bt, String nameImage);
+        Bitmap onDownloadCompletedInBackGround(Bitmap bt, String nameImage);
     }
 
     public void setOnDownloadedListener(OnDownloadedListener onDownListener) {
@@ -357,7 +357,7 @@ public class AuxiliarPhoto {
                     e.printStackTrace();
                 }
             if (onDownListener != null)
-                onDownListener.onDownloadCompletedInBackGround(bitmap,nameImage);
+                bitmap = onDownListener.onDownloadCompletedInBackGround(bitmap,nameImage);
             return bitmap;
         }
 
