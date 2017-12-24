@@ -45,6 +45,9 @@ public class AuxiliarPhoto {
         PATH = PATH.replace("cache", "app_");
     }
 
+    public String getPath() {
+        return this.PATH;
+    }
 
     /*****************************************************
      * ********* Baixa a imagem e salva ou apenas seta-a.
