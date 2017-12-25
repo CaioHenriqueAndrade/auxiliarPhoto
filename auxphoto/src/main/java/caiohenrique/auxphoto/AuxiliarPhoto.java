@@ -44,7 +44,14 @@ public class AuxiliarPhoto {
         this.PATH = context.getCacheDir().getAbsolutePath();
         PATH = PATH.replace("cache", "app_");
     }
-
+    /*
+        private void createDirectoryIfNeeded(String nameDirectory) {
+            File file = new File(getPath(), nameDirectory);
+            if(!file.exists()) {
+                file.mkdirs();
+            }
+        }
+    */
     public String getPath() {
         return this.PATH;
     }
@@ -93,7 +100,7 @@ public class AuxiliarPhoto {
         File directory;
         directory = cw.getDir(dir, Context.MODE_PRIVATE);
         // Create imageDir
-        File mypath = new File(directory, nameImage);
+        File mypath = new File( directory, nameImage);
 
         FileOutputStream fos = null;
         try {
@@ -160,6 +167,18 @@ public class AuxiliarPhoto {
         return new File(PATH + directory, nameImage);
     }
 
+    public void deletAllFiles(String dir) {
+        File f = new File(getPath() + dir);
+
+        if(f.isDirectory()) {
+            for (File file : f.listFiles()) {
+                Log.i("fileDeleted","deletando file " + file.getName());
+                file.delete();
+            }
+        }
+    }
+
+
     public void deleteFile(String dir, String nameImage) {
         String PathLocal = PATH + dir;
         try {
@@ -188,6 +207,7 @@ public class AuxiliarPhoto {
     }
 
     public Bitmap loadImageFromStorageOrDownload(String dir, String nameImage, String UrlDownload, OnDownloadedListener onDown) {
+
         if (onDown != null) onDownListener = onDown;
         Bitmap b = null;
         String PathLocal = PATH + dir;
