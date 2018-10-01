@@ -1,2 +1,2 @@
 # auxiliarPhoto
-this repository is one lib for help developers with images download one by one
+this repository is a lib for help developers with download of images in Android 
